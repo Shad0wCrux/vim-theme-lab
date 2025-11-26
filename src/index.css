@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Add custom global styles after Tailwind */
+body {
+  background-color: #000000;
+  color: #22c55e; /* Tailwind's green-500-ish, but hardcoded for now */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Mono", Menlo, monospace;
+}
+

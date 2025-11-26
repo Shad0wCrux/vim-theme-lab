@@ -10,6 +10,7 @@ const DEFAULT_THEME: ThemeConfig = {
     String:  { fg: "#00ffaf", bg: "#000000" },
     Keyword: { fg: "#00ffff", bg: "#000000" },
     Function:{ fg: "#00ff5f", bg: "#000000" },
+    Type:    { fg: "#00ff5f", bg: "#000000" },
     LineNr:  { fg: "#006b3b", bg: "#000000" },
     StatusLine:   { fg: "#000000", bg: "#00ff5f" },
     StatusLineNC: { fg: "#008700", bg: "#000000" },
@@ -27,6 +28,7 @@ const PRESET_THEMES: Record<string, ThemeConfig> = {
       String:  { fg: "#afffaf", bg: "#000000" },
       Keyword: { fg: "#87d7ff", bg: "#000000" },
       Function:{ fg: "#ffffff", bg: "#000000" },
+      Type:    { fg: "#ffffff", bg: "#000000" }, 
       LineNr:  { fg: "#5f875f", bg: "#000000" },
       StatusLine:   { fg: "#000000", bg: "#87ff5f" },
       StatusLineNC: { fg: "#5f875f", bg: "#000000" },
@@ -41,6 +43,7 @@ const PRESET_THEMES: Record<string, ThemeConfig> = {
       String:  { fg: "#ffd787", bg: "#1c1c1c" },
       Keyword: { fg: "#ffaf5f", bg: "#1c1c1c" },
       Function:{ fg: "#ffffaf", bg: "#1c1c1c" },
+      Type:    { fg: "#ffffaf", bg: "#1c1c1c" },
       LineNr:  { fg: "#5f5f5f", bg: "#1c1c1c" },
       StatusLine:   { fg: "#1c1c1c", bg: "#ffd787" },
       StatusLineNC: { fg: "#aaaaaa", bg: "#262626" },
@@ -56,6 +59,7 @@ const PRESET_THEMES: Record<string, ThemeConfig> = {
       Keyword:    { fg: "#fb4934", bg: "#282828" },
       Function:   { fg: "#fabd2f", bg: "#282828" },
       LineNr:     { fg: "#7c6f64", bg: "#282828" },
+      Type:       { fg: "#fabd2f", bg: "#282828" },
       StatusLine: { fg: "#3c3836", bg: "#b8bb26" },
       StatusLineNC: { fg: "#a89984", bg: "#3c3836" },
     },
@@ -69,7 +73,8 @@ const PRESET_THEMES: Record<string, ThemeConfig> = {
       Comment:    { fg: "#565f89", bg: "#1a1b26" },
       String:     { fg: "#9ece6a", bg: "#1a1b26" },
       Keyword:    { fg: "#bb9af7", bg: "#1a1b26" },
-      Function:   { fg: "#7aa2f7", bg: "#1a1b26" },
+      Function:   { fg: "#7aa2f7", bg: "#1a1b26" }, 
+      Type:       { fg: "#7aa2f7", bg: "#1a1b26" },
       LineNr:     { fg: "#414868", bg: "#1a1b26" },
       StatusLine: { fg: "#1a1b26", bg: "#7aa2f7" },
       StatusLineNC: { fg: "#a9b1d6", bg: "#24283b" },
@@ -85,6 +90,7 @@ const PRESET_THEMES: Record<string, ThemeConfig> = {
       String:     { fg: "#2aa198", bg: "#fdf6e3" },
       Keyword:    { fg: "#859900", bg: "#fdf6e3" },
       Function:   { fg: "#b58900", bg: "#fdf6e3" },
+      Type:       { fg: "#b58900", bg: "#fdf6e3" },
       LineNr:     { fg: "#93a1a1", bg: "#eee8d5" },
       StatusLine: { fg: "#fdf6e3", bg: "#268bd2" },
       StatusLineNC: { fg: "#657b83", bg: "#eee8d5" },
@@ -125,7 +131,8 @@ const generateVimColorscheme = (theme: ThemeConfig): string => {
   addGroup("Comment");
   addGroup("String");
   addGroup("Keyword");
-  addGroup("Function");
+  addGroup("Function"); 
+  addGroup("Type");
   addGroup("LineNr");
   addGroup("StatusLine");
   addGroup("StatusLineNC");
@@ -163,8 +170,8 @@ const App: React.FC = () => {
       {/* Main layout */}
       <main className="flex flex-1 overflow-hidden">
         {/* Vim preview panel */}
-        <section className="flex-1 border-r border-emerald-800 p-4 overflow-auto">
-          <div className="border border-emerald-700 rounded-md overflow-hidden">
+            <section className="flex-1 min-w-0 border-r border-emerald-800 p-4 overflow-auto">
+            <div className="border border-emerald-700 rounded-md overflow-hidden">
             {/* top statusline */}
             <div
               className="px-2 py-1 text-xs flex justify-between"
@@ -320,7 +327,7 @@ const App: React.FC = () => {
         </section>
 
         {/* Controls panel */}
-        <aside className="w-80 max-w-xs p-4 space-y-4 bg-black/80 border-l border-emerald-800">
+         <aside className="w-80 max-w-xs flex-shrink-0 p-4 space-y-4 bg-black/80 border-l border-emerald-800"> 
           {/* Theme Info */}
           <div>
             <h2 className="text-sm font-semibold text-emerald-300 mb-2">
@@ -351,7 +358,7 @@ const App: React.FC = () => {
                     <label className="mb-1 text-emerald-500">Select a Preset</label>
                 <select
                     className="bg-black border border-emerald-700 rounded px-2 py-1 text-emerald-300 text-xs focus:outline-none focus:border-emerald-400"
-                    value={theme.name in PRESET_THEMES ? theme.name : "custom"}
+                    value={theme.name}
                     onChange={(e) => {
                     const key = e.target.value;
                     if (key in PRESET_THEMES) {
@@ -379,7 +386,7 @@ const App: React.FC = () => {
               Highlight Groups
             </h2>
 
-            <div className="max-h-100 overflow-y-auto pr-2 space-y-3 border border-emerald-900/60 rounded-md p-2">
+            <div className="max-h-72 overflow-y-auto pr-2 space-y-3 border border-emerald-900/60 rounded-md p-2">
                 {/* Normal */}
                 <GroupControls
                   label="Normal"
@@ -438,6 +445,18 @@ const App: React.FC = () => {
                   groups: { ...theme.groups, Function: group },
                 })
               }
+            />
+
+            {/* Type */}
+            <GroupControls
+                label="Type"
+                group={theme.groups.Type}
+                onChange={(group) =>
+                    setTheme({
+                    ...theme,
+                    groups: { ...theme.groups, Type: group },
+                    })
+                }
             />
 
             {/* LineNr */}

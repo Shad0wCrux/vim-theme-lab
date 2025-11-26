@@ -15,6 +15,7 @@ export type ThemeConfig = {
     String: HighlightGroup;
     Keyword: HighlightGroup;
     Function: HighlightGroup;
+    Type: HighlightGroup;
     LineNr: HighlightGroup;
     StatusLine: HighlightGroup;
     StatusLineNC: HighlightGroup;

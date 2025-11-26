@@ -9,3 +9,6 @@ Features:
 - Live visual editor
 - Preset themes
 - 100% client-side, no backend, no database, no tracking
+
+
+Check out [vim-theme-lab](https://github.com/Shad0wCrux/vim-theme-lab/deployments/github-pages)

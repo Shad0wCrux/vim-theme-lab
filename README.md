@@ -20,7 +20,7 @@
 - 🎨 **Live visual editor**  
   Update highlight colors and see changes instantly.
 
-- 🧪 **Preset themes**
+- 🧪 **Preset themes**  
   Work from familiar Vim presets and use them as a base before customizing and making it your own.
 
 - 💾 **Export to `.vim`**  

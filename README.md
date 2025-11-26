@@ -11,4 +11,4 @@ Features:
 - 100% client-side, no backend, no database, no tracking
 
 
-Check out [vim-theme-lab](https://github.com/Shad0wCrux/vim-theme-lab/deployments/github-pages)
+Check out [vim-theme-lab](https://shad0wcrux.github.io/vim-theme-lab/)
